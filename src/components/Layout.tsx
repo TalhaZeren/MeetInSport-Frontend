@@ -1,22 +1,33 @@
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import {useAuthStore} from "../features/auth/authStore";
+import Footer from "./Footer";
 
 const Layout = () => {
     const {isAuthenticated, name, role, logout} = useAuthStore();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleLogout = () => {
         logout();
         navigate('/login') 
     };
 
+    const isHomePage = location.pathname === "/";
+    const navClasses = isHomePage 
+    ? "absolute top-0 w-full z-50 text-white p-6"
+    : "text-white p-4 shadow-md w-full";
+
+    const navStyle = isHomePage
+    ? { backgroundColor: 'transparent' }
+    : { backgroundColor: 'rgb(9, 58, 50)' };
+
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className = {`bg-gray-50 flex flex-col ${isHomePage ? 'h-screen overflow-hidden' : 'min-h-screen'}`}>
  
-      <nav className="bg-blue-600 text-white p-4 shadow-md">
+      <nav className={navClasses} style={navStyle}>
         <div className="container mx-auto flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold tracking-wider">MeetInSport</Link>
+          <Link to="/" className="text-3xl font-bold tracking-wider ">MeetInSport</Link>
           
           <div className="space-x-6">
             <Link to="/coaches" className="hover:text-blue-200 transition">Antrenör ara</Link>
@@ -45,9 +56,16 @@ const Layout = () => {
           </div>
         </div>
       </nav>
-      <main className="flex-grow container mx-auto p-4 md:p-8">
+
+
+
+      {/* --- PAGE CONTENT --- */}
+      <main className="flex-grow w-full h-full">
         <Outlet />
       </main>
+
+      {/* --- FOOTER --- */}
+      {!isHomePage && <Footer />}
     </div>
     );      
     };

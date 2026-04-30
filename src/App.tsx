@@ -1,10 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
+import Home from './features/public/Home';
+import Login from './features/auth/Login';
+import Register from './features/auth/Register';
 
-const Home = () => <h1 className="text-3xl font-bold">Welcome to MeetInSport</h1>;
-const Login = () => <h1 className="text-3xl font-bold">Login Page</h1>;
-const Register = () => <h1 className="text-3xl font-bold">Register Page</h1>;
+
+
 const BrowseCoaches = () => <h1 className="text-3xl font-bold">Browse Coaches</h1>;
 const Dashboard = () => <h1 className="text-3xl font-bold text-green-600">Secure Dashboard (You are logged in!)</h1>;
 
