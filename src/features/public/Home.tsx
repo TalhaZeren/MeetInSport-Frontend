@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer'; // Import the Footer!
-import heroVideo from '../../assets/olimpiyatlarturkiye.mp4';
+import heroVideo from '../../assets/turkolimipiyatlar.mp4';
 
 const Home = () => {
   return (
