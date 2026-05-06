@@ -36,8 +36,7 @@ const Home = () => {
           </div>
           <div className="flex items-end justify-start md:justify-end">
             <Link to="/coaches" className="bg-[#0a3a32] hover:bg-[#062621] text-white px-8 py-6 flex items-center gap-4 transition duration-300 w-full md:w-auto">
-              <span className="text-lg tracking-wide">Discover Coaches</span>
-              <span>↓</span>
+              <span className="text-lg tracking-wide">Antrenörleri Keşfet!</span>
             </Link>
           </div>
         </div>

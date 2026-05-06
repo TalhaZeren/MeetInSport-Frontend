@@ -4,23 +4,34 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Home from './features/public/Home';
 import Login from './features/auth/Login';
 import Register from './features/auth/Register';
+import CoachesDirectory from './features/coaches/CoachesDirectory';
+import CoachProfileEditPage from './features/dashboard/CoachProfileEditPage';
+import CoachDetailPage from './features/coaches/CoachDetailPage';
 
 
 
-const BrowseCoaches = () => <h1 className="text-3xl font-bold">Browse Coaches</h1>;
-const Dashboard = () => <h1 className="text-3xl font-bold text-green-600">Secure Dashboard (You are logged in!)</h1>;
 
+const Dashboard = () => <h1 className="text-3xl font-bold text-green-600">Secure Dashboard </h1>;
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Layout />}>
+
+          {/* Auth */}
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="coaches" element={<BrowseCoaches />} />
+
+          {/* Public Directory */}
+          <Route path="coaches" element={<CoachesDirectory />} />
+
+
+          {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="dashboard" element={<Dashboard />} />
+            <Route path="coaches/:id" element={<CoachDetailPage />} />
+            <Route path="coaches/profile/edit" element={<CoachProfileEditPage />} />
           </Route>
         </Route>
       </Routes>

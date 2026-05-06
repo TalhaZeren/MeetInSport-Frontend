@@ -34,7 +34,7 @@ const Layout = () => {
             
             {isAuthenticated ? (
               <>
-                <Link to="/dashboard" className="hover:text-blue-200 transition">Ana Sayfa</Link>
+                <Link to="/coaches/profile/edit" className="hover:text-blue-200 transition">Profilim</Link>
                 <span className="text-sm bg-blue-700 px-3 py-1 rounded-full border border-blue-500">
                   {name} ({role})
                 </span>
