@@ -5,6 +5,7 @@ export interface SportResponse{
 export interface CoachResponse{
     id : string; 
     fullName : string;
+    email : string;
     sport : string; 
     bio? : string;
     hourlyRate : number; 

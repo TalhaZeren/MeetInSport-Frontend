@@ -18,6 +18,10 @@ export const coachService = {
   getCoachById : async (id : string) : Promise<CoachResponse> => {
     const response = await axiosClient.get<CoachResponse>(`/coaches/${id}`);
     return response.data;
-  }
+  },
 
+  getMyProfile: async (): Promise<CoachResponse> => {
+    const response = await axiosClient.get<CoachResponse>('/coaches/me');
+    return response.data;
+  }
 };

@@ -35,7 +35,7 @@ const Login = () => {
     mutationFn: authService.login, // The API function to call
     onSuccess: (data) => {
       // If the API returns 200 OK, this block runs automatically
-      setAuth(data.token, data.userId, data.name, data.role);
+      setAuth(data.token, data.userId, data.name, data.email, data.role);
       
    
       if (data.role === 'Coach') {
