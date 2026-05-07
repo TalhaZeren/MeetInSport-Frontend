@@ -23,3 +23,28 @@ export interface UpdateCoachProfileRequest{ // PUT Request for profile update
     location : string;
     iban : string;
 }
+
+export interface CreateLessonPackageRequest{
+    packageName : string;
+    packageDescription : string;    
+    durationInMinutes : number;
+    packagePrice : number;
+    requirements : string;
+    locationType : string; 
+    lessonModel : string;
+    coverImageUrl : string;
+}
+
+export interface LessonPackageResponse {
+    id : string;
+    coachId : string;
+    packageName : string; 
+    packageDescription : string;
+    durationInMinutes : number;
+    packagePrice : number;
+    requirements : string[];
+    locationType : string; 
+    lessonModel : string;
+    coverImageUrl : string;
+    isActive : boolean;
+}

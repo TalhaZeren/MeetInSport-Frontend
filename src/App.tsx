@@ -7,6 +7,7 @@ import Register from './features/auth/Register';
 import CoachesDirectory from './features/coaches/CoachesDirectory';
 import CoachProfileEditPage from './features/dashboard/CoachProfileEditPage';
 import CoachDetailPage from './features/coaches/CoachDetailPage';
+import CreateLessonPackagePage from './features/dashboard/CreateLessonPackagePage';
 
 
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="coaches/:id" element={<CoachDetailPage />} />
             <Route path="coaches/profile/edit" element={<CoachProfileEditPage />} />
+            <Route path = "dashboard/create-package" element={<CreateLessonPackagePage />} />
           </Route>
         </Route>
       </Routes>

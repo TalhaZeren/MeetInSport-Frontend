@@ -185,7 +185,7 @@ const StatsSection = () => (
       </div>
       
       <div className="hidden lg:block h-[600px] border border-[#C9A84C]/30 p-2 reveal delay-300 relative group">
-        <img src="https://images.unsplash.com/photo-1526676037777-05a232554f77?w=900&q=80" alt="Stats" className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />
+        <img src="kayaklikosu.png" alt="Stats" className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />
       </div>
     </div>
   </section>
