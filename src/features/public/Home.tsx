@@ -98,8 +98,9 @@ const HeroSection = () => (
         <Link to="/coaches" className="bg-[#C9A84C] text-[#0B1628] px-8 py-4 text-sm font-bold tracking-widest uppercase hover:bg-white transition-all duration-300 shadow-lg hover:shadow-[#C9A84C]/40 hover:-translate-y-1">
           Antrenörleri Keşfet
         </Link>
-        <Link to="/register" className="border border-white/40 text-white px-8 py-4 text-sm font-semibold tracking-widest uppercase hover:border-[#C9A84C] hover:text-[#C9A84C] transition-all duration-300">
-          Kayıt Ol
+        <Link to="/packages" className="border border-white/40 text-white px-8 py-4 text-sm font-semibold tracking-widest uppercase hover:border-[#C9A84C] hover:text-[#C9A84C] transition-all duration-300">
+          Ders Paketlerini İncele
+
         </Link>
       </div>
     </div>

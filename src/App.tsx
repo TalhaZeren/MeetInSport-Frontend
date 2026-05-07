@@ -8,32 +8,37 @@ import CoachesDirectory from './features/coaches/CoachesDirectory';
 import CoachProfileEditPage from './features/dashboard/CoachProfileEditPage';
 import CoachDetailPage from './features/coaches/CoachDetailPage';
 import CreateLessonPackagePage from './features/dashboard/CreateLessonPackagePage';
+import CoachDashboard from './features/dashboard/CoachDashboard';
+import PublicRoute from './components/PublicRoute';
 
 
 
 
-const Dashboard = () => <h1 className="text-3xl font-bold text-green-600">Secure Dashboard </h1>;
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<Layout />}>
 
-          {/* Auth */}
+          {/* Home */}
           <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
 
           {/* Public Directory */}
           <Route path="coaches" element={<CoachesDirectory />} />
 
+          {/* GUEST ONLY ROUTES: Logged-in users cannot enter here */}
+          <Route element={<PublicRoute />}>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="coaches/dashboard" element={<CoachDashboard />} />
             <Route path="coaches/:id" element={<CoachDetailPage />} />
             <Route path="coaches/profile/edit" element={<CoachProfileEditPage />} />
-            <Route path = "dashboard/create-package" element={<CreateLessonPackagePage />} />
+            <Route path = "coaches/dashboard/create-package" element={<CreateLessonPackagePage />} />
           </Route>
         </Route>
       </Routes>

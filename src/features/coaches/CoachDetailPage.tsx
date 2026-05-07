@@ -70,7 +70,7 @@ const CoachDetailPage = () => {
             {/* Header Section with Avatar */}
             <div className="flex flex-col sm:flex-row sm:items-end justify-between -mt-12 sm:-mt-16 mb-8 gap-4">
               
-              <div className="flex items-end gap-6">
+              <div className="flex items-end gap-6 mt-6">
                 {/* The "Image" Avatar */}
                 <div className="w-24 h-24 sm:w-32 sm:h-32 bg-white rounded-full p-2 shadow-md relative z-10">
                   <div className="w-full h-full bg-[#0D6E6E] rounded-full flex items-center justify-center text-4xl sm:text-5xl font-bold font-display text-white">
@@ -79,7 +79,7 @@ const CoachDetailPage = () => {
                 </div>
                 
                 <div className="pb-2">
-                  <h1 className="text-3xl font-display font-bold text-[#0B1628]">{coach.fullName}</h1>
+                  <h1 className=" text-3xl font-display font-bold text-[#0B1628]">{coach.fullName}</h1>
                   <span className="inline-block bg-[#E8500A] bg-opacity-10 text-[#E8500A] px-3 py-1 rounded-md font-semibold mt-2">
                     {coach.sport}
                   </span>

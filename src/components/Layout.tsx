@@ -25,7 +25,7 @@ const Layout = () => {
 
   // DİNAMİK YÖNLENDİRME MANTIĞI
   // Kullanıcı Antrenör ise kendi çalışma alanına, Öğrenci ise öğrenci paneline yönlendirilir.
-  const profileRoute = role === 'Coach' ? '/coach/dashboard' : '/student/dashboard';
+  const profileRoute = role === 'Coach' ? '/coaches/dashboard' : '/student/dashboard';
 
   return (
     <div className="bg-gray-50 flex flex-col min-h-screen">
@@ -34,16 +34,16 @@ const Layout = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="text-xl font-bold tracking-wide hover:scale-105 transition-all duration-300"
+            className="text-3xl font-bold tracking-wide hover:scale-105 transition-all duration-300"
           >
-            Meet<span className="text-emerald-200">InSport</span>
+            Meet<span className="text-emerald-400">InSport</span>
           </Link>
 
           {/* Navbar Links */}
           <div className="flex items-center gap-4">
             <Link
               to="/coaches"
-              className="px-4 py-2 rounded-xl text-gray-100 font-medium hover:bg-white/10 hover:text-white transition-all duration-300"
+              className="px-4 py-2 rounded-xl text-gray-100 font-medium hover:bg-white/10 hover:text-white transition-all duration-300 bg-white/10 "
             >
               Antrenör Ara
             </Link>
@@ -64,7 +64,7 @@ const Layout = () => {
                 <div className="hidden md:flex items-center px-4 py-2 rounded-xl bg-[rgb(11,22,40)]/80 border border-white/10 shadow-md">
                   <span className="font-semibold text-gray-100">{name}</span>
                   <span className="ml-2 text-xs bg-[rgb(9,58,50)] text-emerald-100 px-2 py-1 rounded-lg">
-                    {role}
+                    {role === 'Coach' ? 'Antrenör' : 'Öğrenci'}
                   </span>
                 </div>
 

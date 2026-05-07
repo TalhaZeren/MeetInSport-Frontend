@@ -22,9 +22,6 @@ const Footer = () => {
           <h4 className="text-white font-semibold uppercase tracking-wider mb-6">Platform</h4>
           <div className="flex flex-col space-y-3 text-sm font-light">
             <Link to="/coaches" className="hover:text-white transition">Browse Coaches</Link>
-            <Link to="/packages" className="hover:text-white transition">Lesson Packages</Link>
-            <Link to="/register" className="hover:text-white transition">Become a Coach</Link>
-            <Link to="/login" className="hover:text-white transition">Sign In</Link>
           </div>
         </div>
 

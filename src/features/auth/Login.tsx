@@ -39,9 +39,9 @@ const Login = () => {
       
    
       if (data.role === 'Coach') {
-        navigate('/dashboard'); // We will change this to /coach/dashboard later
+        navigate('/coaches/dashboard'); 
       } else {
-        navigate('/dashboard'); // We will change this to /student/dashboard later
+        navigate('/students/dashboard'); 
       }
     },
     onError: (error: any) => {

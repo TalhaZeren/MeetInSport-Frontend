@@ -4,7 +4,8 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { lessonPackageService } from '../../api/services/lessonPackageService';
-
+import {useState} from 'react';
+import { imageService } from '../../api/services/imageService';
 
 const packageSchema = z.object({
     packageName: z.string().min(1, 'Paket adı gereklidir.'),
@@ -17,17 +18,19 @@ const packageSchema = z.object({
     coverImageUrl : z.string().optional(),
 });
 
-
 type PackageFormValues = z.infer<typeof packageSchema>;
 
 const CreateLessonPackagePage = () => {
     const navigate = useNavigate();
+    const [isUploadingImage, setIsUploadingImage] = useState(false);
 
     // REact HookForm
 
     const {
         register,
         handleSubmit,
+        watch,
+        setValue,
         setError,
         formState : {errors, isDirty}
     } = useForm<PackageFormValues>({
@@ -80,7 +83,7 @@ const CreateLessonPackagePage = () => {
 return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fade-in">
       
-      <Link to="/coach/dashboard" className="text-[#8A96A3] font-semibold hover:text-[#0B1628] mb-6 flex items-center transition">
+      <Link to="/coaches/dashboard" className="text-[#8A96A3] font-semibold hover:text-[#0B1628] mb-6 flex items-center transition">
         &larr; Arayüze Dön
       </Link>
 
@@ -185,13 +188,81 @@ return (
 
             {/* Optional Cover Image */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-[#0B1628] uppercase tracking-wide mb-2"></label>
-              <input 
-                type="text" 
-                {...register('coverImageUrl')} 
-                placeholder="https://example.com/image.jpg"
-                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#093A32]" 
-              />
+              <label className="block text-sm font-medium text-[#0B1628] uppercase tracking-wide mb-2">
+                Fotoğraf (Opsiyonel)
+              </label>
+              
+              <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md hover:border-[#C9A84C] transition-colors relative group overflow-hidden bg-gray-50">
+                
+                {/* 1. Loading State */}
+                {isUploadingImage ? (
+                  <div className="flex flex-col items-center justify-center py-6">
+                    <div className="w-8 h-8 border-4 border-[#093A32] border-t-transparent rounded-full animate-spin"></div>
+                    <p className="text-sm text-gray-500 mt-4 animate-pulse">Uploading image securely...</p>
+                  </div>
+                ) : 
+                
+                /* 2. Success State (Show the Image) */
+                watch('coverImageUrl') ? (
+                  <div className="relative w-full flex flex-col items-center">
+                    <img 
+                      src={watch('coverImageUrl')} 
+                      alt="Cover Preview" 
+                      className="h-48 w-full object-cover rounded-md shadow-sm border border-gray-200"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setValue('coverImageUrl', '', { shouldDirty: true })}
+                      className="mt-4 px-4 py-2 bg-red-50 text-red-600 rounded-md text-sm font-bold hover:bg-red-100 transition"
+                    >
+                      Remove Image
+                    </button>
+                  </div>
+                ) : 
+                
+                /* 3. Empty State (Upload Button) */
+                (
+                  <div className="space-y-1 text-center py-4">
+                    <svg className="mx-auto h-12 w-12 text-gray-400 group-hover:text-[#C9A84C] transition-colors" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                      <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <div className="flex text-sm text-gray-600 justify-center mt-2">
+                      <label htmlFor="file-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-[#093A32] hover:text-[#C9A84C] focus-within:outline-none px-3 py-1 shadow-sm border border-gray-200">
+                        <span>Fotoğraf seç veya dosya ekle</span>
+                        
+                        <input 
+                          id="file-upload" 
+                          name="file-upload" 
+                          type="file" 
+                          accept="image/*"
+                          className="sr-only" 
+                          onChange={async (e) => {
+                            const file = e.target.files?.[0];
+                            if (!file) return;
+
+                            try {
+                              setIsUploadingImage(true);
+                              // Send file to C# backend
+                              const uploadedUrl = await imageService.uploadImage(file);
+                              // Save the resulting URL into React Hook Form!
+                              setValue('coverImageUrl', uploadedUrl, { shouldDirty: true });
+                            } catch (error) {
+                              console.error("Image upload failed", error);
+                              alert("Yükleme başarısız oldu. Lütfen tekrar deneyiniz.");
+                            } finally {
+                              setIsUploadingImage(false);
+                            }
+                          }}
+                        />
+                      </label>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2">PNG, JPG, GIF en fazla 5MB</p>
+                  </div>
+                )}
+              </div>
+              
+              {/* Hidden input to ensure Zod validation tracks it correctly */}
+              <input type="hidden" {...register('coverImageUrl')} />
             </div>
 
           </div>
@@ -204,7 +275,7 @@ return (
 
           <div className="flex gap-4 pt-6 border-t border-gray-100">
             <Link 
-              to="/coach/dashboard"
+              to="/coaches/dashboard"
               className="px-8 py-3 border border-gray-300 text-[#0B1628] rounded-md font-bold tracking-widest hover:bg-gray-50 transition uppercase text-sm flex items-center justify-center"
             >
               İptal 
