@@ -6,7 +6,7 @@ const PublicRoute = () => {
 
   if (isAuthenticated) {
     // Redirect based on their role
-    const dashboardRoute = role === 'Coach' ? '/coaches/dashboard' : '/students/dashboard';
+    const dashboardRoute = role === 'Coach' ? '/coaches/dashboard' : '/student/dashboard';
     return <Navigate to={dashboardRoute} replace />;
   }
   return <Outlet />;

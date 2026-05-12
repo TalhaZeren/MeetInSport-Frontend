@@ -48,3 +48,38 @@ export interface LessonPackageResponse {
     coverImageUrl : string;
     isActive : boolean;
 }
+
+export const ReservationStatus = {
+    Pending: 1,
+    Confirmed: 2, 
+    Cancelled: 3, 
+    Completed: 4, 
+    Refunded: 5
+} as const;
+
+export type ReservationStatus = typeof ReservationStatus[keyof typeof ReservationStatus];
+
+export interface CreateReservationRequest {
+    packageId : string;
+    scheduleAt : string; 
+    locationType : number ;
+    notes? : string;
+}
+
+
+export interface CancelReservationRequest {
+    cancelReason : string;
+}
+
+
+export interface ReservationResponse {
+  id: string;
+  packageId: string;
+  coachId: string;
+  scheduledAt: string;  // matches API response field name
+  status: string;
+  locationType: string;
+  notes?: string;
+  createdAt: string;
+}
+

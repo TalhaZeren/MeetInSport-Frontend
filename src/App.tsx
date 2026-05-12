@@ -10,6 +10,7 @@ import CoachDetailPage from './features/coaches/CoachDetailPage';
 import CreateLessonPackagePage from './features/dashboard/CreateLessonPackagePage';
 import CoachDashboard from './features/dashboard/CoachDashboard';
 import PublicRoute from './components/PublicRoute';
+import StudentDashboard from './features/dashboard/StudentDashboard';
 
 
 
@@ -39,6 +40,8 @@ function App() {
             <Route path="coaches/:id" element={<CoachDetailPage />} />
             <Route path="coaches/profile/edit" element={<CoachProfileEditPage />} />
             <Route path = "coaches/dashboard/create-package" element={<CreateLessonPackagePage />} />
+            <Route path = "student/dashboard" element={<StudentDashboard />} />
+            
           </Route>
         </Route>
       </Routes>

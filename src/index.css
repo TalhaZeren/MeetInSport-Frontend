@@ -1,3 +1,150 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #c9a84c;
+  color: rgb(11, 22, 40);
+  padding: 14px 32px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateX(-110%);
+  transition: transform 0.3s ease;
+}
+
+.btn-gold:hover::after { transform: translateX(0); }
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(201, 168, 76, 0.28);
+}
+.btn-gold:active { transform: translateY(0); }
+
+.btn-gold svg {
+  transition: transform 0.25s ease;
+}
+.btn-gold:hover svg {
+  transform: translateX(3px);
+}
+
+/* Append this to your src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --forest: rgb(9, 58, 50);
+  --navy:   rgb(11, 22, 40);
+  --gold:   #c9a84c;
+  --cream:  #f4efe6;
+  --muted:  #8a9aaa;
+  --line:   rgba(11,22,40,0.08);
+  --card:   #ffffff;
+  --bg:     #f0ece4;
+}
+
+.db {
+  font-family: 'Instrument Sans', sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  color: var(--navy);
+  overflow-x: hidden;
+}
+
+/* ── LAYOUT ── */
+.db-layout { display: flex; min-height: 100vh; }
+
+/* ── SIDEBAR ── */
+.db-sidebar {
+  width: 260px; flex-shrink: 0;
+  background: var(--navy);
+  display: flex; flex-direction: column;
+  padding: 0;
+  position: sticky; top: 0; height: 100vh;
+  overflow-y: auto;
+}
+.db-sidebar-logo { padding: 32px 28px 24px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.db-sidebar-logo span { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+.db-sidebar-logo span em { font-style: normal; color: var(--gold); }
+.db-coach-card { padding: 24px 28px; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; flex-direction: column; gap: 12px; }
+.db-coach-avatar-wrap { position: relative; width: 52px; }
+.db-coach-avatar { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
+.db-online-dot { position: absolute; bottom: 2px; right: 0; width: 10px; height: 10px; border-radius: 50%; background: #4ade80; border: 2px solid var(--navy); }
+.db-coach-name { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: #fff; }
+.db-coach-sport { font-size: 12px; color: rgba(255,255,255,0.45); }
+.db-nav { padding: 16px 0; flex: 1; }
+.db-nav-section { padding: 8px 28px 4px; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+.db-nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 28px; font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s ease; border-left: 2px solid transparent; user-select: none; }
+.db-nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+.db-nav-item:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.04); }
+.db-nav-item.active { color: #fff; border-left-color: var(--gold); background: rgba(201,168,76,0.08); }
+.db-nav-item .badge { margin-left: auto; background: var(--forest); color: #fff; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 99px; }
+
+/* ── MAIN ── */
+.db-main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.db-topbar { background: #fff; padding: 0 40px; height: 64px; min-height: 64px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
+.db-topbar-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--navy); }
+.db-topbar-right { display: flex; align-items: center; gap: 16px; }
+.db-topbar-date { font-size: 13px; color: var(--muted); }
+.db-content { padding: 36px 40px; flex: 1; }
+
+/* ── STAT CARDS ── */
+.db-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px; }
+.stat-card { background: var(--card); padding: 24px; border: 1px solid var(--line); position: relative; overflow: hidden; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.stat-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(11,22,40,0.08); }
+.stat-card-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.stat-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.stat-value { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--navy); line-height: 1; margin-bottom: 6px; }
+.stat-sub { font-size: 12px; color: var(--muted); }
+.stat-icon { position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; opacity: 0.12; }
+.stat-icon svg { width: 20px; height: 20px; }
+
+/* ── SECTION HEADER & TABS ── */
+.db-section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.db-section-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--navy); display: flex; align-items: center; gap: 10px; }
+.db-section-title::before { content: ''; width: 4px; height: 18px; background: var(--gold); display: block; border-radius: 2px; }
+.db-btn-sm { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; transition: all 0.2s; border-radius: 4px;}
+.db-btn-primary { background: var(--forest); color: #fff; }
+.db-btn-primary:hover { background: var(--navy); }
+.db-res-tabs { display: flex; gap: 4px; margin-bottom: 20px; }
+.db-tab { padding: 8px 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; border-radius: 4px; color: var(--muted); background: transparent; border: none; }
+.db-tab.active { background: var(--navy); color: #fff; }
+
+/* ── TABLES & CARDS ── */
+.db-packages { background: var(--card); border: 1px solid var(--line); overflow: hidden; margin-bottom: 36px; border-radius: 8px;}
+.pkg-table { width: 100%; border-collapse: collapse; }
+.pkg-table th { padding: 12px 20px; text-align: left; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); font-weight: 500; border-bottom: 1px solid var(--line); background: var(--bg); }
+.pkg-table td { padding: 16px 20px; font-size: 14px; color: var(--navy); border-bottom: 1px solid var(--line); }
+.pkg-name { font-weight: 600; color: var(--navy); }
+
+.res-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.res-card { background: var(--card); border: 1px solid var(--line); overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; cursor: pointer; position: relative; border-radius: 8px;}
+.res-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(11,22,40,0.1); }
+.res-card-top { padding: 16px 18px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; }
+.res-time { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--navy); line-height: 1; }
+.res-status { font-size: 11px; font-weight: 600; padding: 4px 10px; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 2px; }
+.res-status.upcoming { background: rgba(9,58,50,0.1); color: var(--forest); }
+.res-status.completed { background: rgba(11,22,40,0.06); color: var(--muted); }
+.res-status.cancelled { background: rgba(220,53,69,0.08); color: #dc3545; }
+.res-card.upcoming::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); }
+.res-card-body { padding: 16px 18px; }
+.res-student { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.res-student-name { font-size: 14px; font-weight: 600; color: var(--navy); }
+.res-pkg-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--bg); border-radius: 4px; }
+
+/* ── EMPTY STATE ── */
+.db-empty { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 14px; background: var(--card); border: 1px solid var(--line); grid-column: 1 / -1; border-radius: 8px;}

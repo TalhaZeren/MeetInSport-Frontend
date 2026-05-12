@@ -41,7 +41,7 @@ const Login = () => {
       if (data.role === 'Coach') {
         navigate('/coaches/dashboard'); 
       } else {
-        navigate('/students/dashboard'); 
+        navigate('/student/dashboard'); 
       }
     },
     onError: (error: any) => {

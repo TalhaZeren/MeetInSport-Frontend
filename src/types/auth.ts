@@ -18,4 +18,3 @@ export interface RegisterRequest {
     roleId : number;    // 1 = Admin, 2 = Coach, 3 = Student
     sport? : string;   // Only needed if RoleId is 2
 }
-

@@ -158,7 +158,7 @@ const ServicesSection = () => (
 );
 
 const StatsSection = () => (
-  <section className="bg-[#0B1628] py-32 px-6 md:px-16 relative overflow-hidden">
+  <section className="bg-[#093A32] py-32 px-6 md:px-16 relative overflow-hidden">
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[10rem] md:text-[18rem] font-serif font-black text-white/5 whitespace-nowrap select-none pointer-events-none">
       STATS
     </div>
@@ -174,10 +174,10 @@ const StatsSection = () => (
         
         <div className="grid grid-cols-2 gap-[1px] bg-white/10 border border-white/10 reveal delay-200">
           {[
-            { v: '15+', l: 'Spor Dalı' }, { v: '12K', l: 'Rezervasyon' },
-            { v: '1500', l: 'Aktif Kullanıcı' }, { v: '4.9', l: 'Ortalama Puan' }
+            { v: '70+', l: 'Spor Dalı' }, { v: '12K', l: 'Rezervasyon' },
+            { v: '30k', l: 'Aktif Kullanıcı' }, { v: '4.7', l: 'Ortalama Puan' }
           ].map((stat, i) => (
-            <div key={i} className="p-8 bg-[#0B1628] hover:bg-[#093A32]/40 transition-colors">
+            <div key={i} className="p-8 bg-[#C9A84C] hover:bg-[#093A32]/40 transition-colors">
               <p className="text-4xl md:text-5xl font-serif font-black mb-2 text-shimmer">{stat.v}</p>
               <p className="text-white/40 text-xs tracking-widest uppercase">{stat.l}</p>
             </div>
@@ -186,7 +186,7 @@ const StatsSection = () => (
       </div>
       
       <div className="hidden lg:block h-[600px] border border-[#C9A84C]/30 p-2 reveal delay-300 relative group">
-        <img src="kayaklikosu.png" alt="Stats" className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />
+        <img src="src/assets/tenis123123.jpg" className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />
       </div>
     </div>
   </section>

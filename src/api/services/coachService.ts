@@ -1,27 +1,26 @@
 import axiosClient from '../axiosClient';
+import { ENDPOINTS } from '../endpoints';
 import type { CoachResponse, UpdateCoachProfileRequest } from '../../types';
 
 export const coachService = {
   
   getAllCoaches: async (): Promise<CoachResponse[]> => {
-    // Hits GET http://localhost:8080/api/v1/coaches
-    const response = await axiosClient.get<CoachResponse[]>('/coaches');
+    const response = await axiosClient.get<CoachResponse[]>(ENDPOINTS.COACHES.BASE);
     return response.data;
   },
 
-  // PUT Request to upload profile image
   updateProfile : async (data : UpdateCoachProfileRequest) : Promise<CoachResponse>=> {
-    const response  = await axiosClient.put<CoachResponse>('/coaches/profile', data);
+    const response  = await axiosClient.put<CoachResponse>(ENDPOINTS.COACHES.PROFILE, data);
     return response.data;
   },
 
   getCoachById : async (id : string) : Promise<CoachResponse> => {
-    const response = await axiosClient.get<CoachResponse>(`/coaches/${id}`);
+    const response = await axiosClient.get<CoachResponse>(ENDPOINTS.COACHES.BY_ID(id));
     return response.data;
   },
 
   getMyProfile: async (): Promise<CoachResponse> => {
-    const response = await axiosClient.get<CoachResponse>('/coaches/me');
+    const response = await axiosClient.get<CoachResponse>(ENDPOINTS.COACHES.ME);
     return response.data;
   }
 };
