@@ -54,7 +54,7 @@ const CreateLessonPackagePage = () => {
         mutationFn : lessonPackageService.createPackage,
         onSuccess : () => {
             alert('Ders Paketi Başarıyla Oluşturuldu!');
-            navigate('coach/dashboard');
+            navigate('../coaches/dashboard');
         },
         onError : (error: any) => {
             console.error("Ders Paketi oluşturulurken hata oluştu");

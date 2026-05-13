@@ -1,6 +1,6 @@
 import axiosClient from "../axiosClient";
 import { ENDPOINTS } from "../endpoints";
-import type { CreateLessonPackageRequest, LessonPackageResponse } from '../../types';
+import type { CreateLessonPackageRequest, LessonPackageResponse, UpdateLessonPackageRequest } from '../../types';
 
 
 export const lessonPackageService ={
@@ -22,6 +22,12 @@ export const lessonPackageService ={
         getPackageById: async (packageId : string)  : Promise<LessonPackageResponse> => {
             const response = await axiosClient.get<LessonPackageResponse>(ENDPOINTS.PACKAGES.BY_ID(packageId));
             return response.data;
-        }
+        },
+        updatePackage : async (packageId : string, data : UpdateLessonPackageRequest) : Promise<LessonPackageResponse> => {
+            const response = await axiosClient.put<LessonPackageResponse>(ENDPOINTS.PACKAGES.BY_ID(packageId), data);
+            return response.data;
+            }
+        };
+    
+        
 
-};

@@ -186,7 +186,7 @@ const CoachDetailPage = () => {
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-lg font-bold text-[#0B1628]">{pkg.packageName}</h3>
                   <span className="bg-[#093A32]/10 text-[#093A32] font-bold px-2 py-1 rounded text-xs">
-                    {pkg.lessonModel === "OneOnOne" ? "Bire Bir Ders" : "Grup Dersi"}
+                    {pkg.lessonModel === "OneOnOne" ? "Bireysel Ders" : "Grup Dersi"}
                   </span>
                 </div>
                 <p className="text-2xl font-black text-[#C9A84C] mb-4">₺{pkg.packagePrice}</p>

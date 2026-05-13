@@ -81,5 +81,21 @@ export interface ReservationResponse {
   locationType: string;
   notes?: string;
   createdAt: string;
+  packageName : string;
+  coachName: string;
+  studentName : string;
+}
+
+export interface UpdateLessonPackageRequest {
+
+    packageName : string;
+    packageDescription : string;    
+    durationInMinutes : number;
+    packagePrice : number;
+    requirements : string[];
+    locationType : string; 
+    lessonModel : string;
+    coverImageUrl : string;
+    isActive : boolean;
 }
 
