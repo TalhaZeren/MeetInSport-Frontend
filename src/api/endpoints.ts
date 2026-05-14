@@ -30,6 +30,7 @@ export const ENDPOINTS = {
         ME :        '/reservation/me',
         BY_ID:      (id: string) => `/reservation/${id}`,
         CANCEL:     (id: string) => `/reservation/${id}/cancel`,
+        CONFIRM :   (id: string) => `/reservation/${id}/confirm`,
     },
     
 } as const;

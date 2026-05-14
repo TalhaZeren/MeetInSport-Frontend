@@ -14,9 +14,6 @@ import StudentDashboard from './features/dashboard/StudentDashboard';
 import UpdateLessonPackagePage from './features/dashboard/UpdateLessonPackagePage';
 
 
-
-
-
 function App() {
   return (
     <BrowserRouter>

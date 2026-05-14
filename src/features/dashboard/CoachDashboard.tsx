@@ -48,6 +48,42 @@ export default function CoachDashboard() {
 
  const queryClient = useQueryClient();
 
+ const {mutate : confirmRes} = useMutation({
+  mutationFn : reservationService.confirmReservation,
+  onSuccess : () => {
+    queryClient.invalidateQueries({queryKey : ['my-reservations']});
+    alert('Rezervasyon başarıyla onaylandı ve onay, öğrenciye e-posta ile iletildi.')
+  },
+  onError: (error : any) => {
+     alert(error.response?.data?.message || "Onaylama sırasında bir hata oluştu.");
+  }
+ });
+
+ const {mutate : cancelRes} = useMutation({
+  mutationFn : ({id, reason}: {id :string, reason: string}) => 
+    reservationService.cancelReservation(id, {cancelReason: reason}),
+  onSuccess : () =>{ 
+    queryClient.invalidateQueries({queryKey: ['my-reservations']});
+    alert("Rezervasyon reddedildi.");
+  },
+  onError : (error : any) => {
+    alert(error.response?.data?.message || "Reddetme sırasında bir hata oluştu.")
+  }
+ });
+
+ const handleConfirm = (id : string) => {
+  if(window.confirm("Bu isteği onaylamak istediğinizden emin misiniz?")){
+    confirmRes(id);
+  }
+ }
+ const handleReject = (id : string) => {
+  const reason = window.prompt("Rezervasyonu reddetme nedeninizi girin. (Öğrenciye iletilecektir.)");
+  if(reason !== null){
+    cancelRes({id,reason});
+  }
+ }
+
+
 
  const {mutate : deletePackage, isPending : isDeleting} = useMutation({
   mutationFn : lessonPackageService.deletePackage,
@@ -57,7 +93,7 @@ export default function CoachDashboard() {
   },
   onError : (error : any) => {
     alert(error.response?.data?.message || "Paket silinirken bir hata meydana geldi.");
-  }
+  } 
  })
 
  const handleDeleteClick = (packageId : string) => {
@@ -65,8 +101,6 @@ export default function CoachDashboard() {
     deletePackage(packageId);
   }
  }
-
- 
 
 
 const mapStatusToTab = (status : string) => {
@@ -193,6 +227,23 @@ const navItems = [
                               <p className="res-student-name">{displayStudentName || "Öğrenci"}</p>
                               <p className="res-student-meta">Konum : {res.locationType === 'CoachLocation' ? 'Antrenör Konumu' : 
                               res.locationType === 'StudentLocation' ? 'Öğrenci Konumu' : res.locationType === 'Online' ? 'Online Oturum' : 'Bilinmiyor'}</p>
+                            </div>
+
+                            <div className="res-card-body">
+                              {res.status === 'Pending' && (
+                                  <div className="flex gap-2 mt-4 pt-4 border-t border-gray-100">
+                                      <button 
+                                          onClick={() => handleConfirm(res.id)}
+                                          className="flex-1 bg-[#093A32] text-white py-2 rounded text-xs font-bold hover:bg-[#062923] transition">
+                                          ONAYLA
+                                      </button>
+                                      <button 
+                                          onClick={() => handleReject(res.id)}
+                                          className="flex-1 bg-red-50 text-red-600 border border-red-100 py-2 rounded text-xs font-bold hover:bg-red-100 transition">
+                                          REDDET
+                                      </button>
+                                  </div>
+                              )}
                             </div>
                           </div>
                           <div className="res-pkg-row">
