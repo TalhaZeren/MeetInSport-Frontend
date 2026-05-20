@@ -35,7 +35,7 @@ const Login = () => {
     mutationFn: authService.login, // The API function to call
     onSuccess: (data) => {
       // If the API returns 200 OK, this block runs automatically
-      setAuth(data.token, data.userId, data.name, data.email, data.role);
+      setAuth(data.token, data.userId, data.name, data.email, data.role, data.avatarUrl);
       
    
       if (data.role === 'Coach') {
@@ -64,7 +64,7 @@ const Login = () => {
     <div className="min-h-[calc(100vh-80px)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full bg-white p-10 rounded-xl shadow-lg border border-gray-100">
         <div className="mb-8 text-center">
-          <h2 className="text-3xl font-bold text-[#0B1628] tracking-tight uppercase">Hoşgeldin</h2>
+          <h2 className="text-3xl font-bold text-[#0B1628] tracking-tight">Hoşgeldin !</h2>
           <p className="text-[#8A96A3] mt-2 text-sm">Devam etmek için lütfen giriş yapın</p>
         </div>
         

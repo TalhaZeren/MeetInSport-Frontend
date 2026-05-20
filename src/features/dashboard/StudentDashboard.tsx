@@ -2,30 +2,25 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAuthStore } from '../auth/authStore';
 import { reservationService } from '../../api/services/reservationService';
+import { formatDate, calculateRemainingDays } from '../../utils/dateUtils';
+import { useNavigate } from 'react-router-dom';
+import AvatarUpload from '../../components/common/AvatarUpload';
+
 
 const Icon = ({d, ...p}: any) => (
     <svg fill ="none" stroke="currentColor" strokeWidth="1.8" viewBox='0 0 24 24' strokeLinecap='round' strokeLinejoin='round' {...p}> <path d={d} /></svg> 
 );
 
-function formatDate(dateStr: string | undefined, locale = 'tr-TR') {
-  if (!dateStr) return { date: '—', time: '' };
-  const d = new Date(dateStr);
-  if (isNaN(d.getTime())) return { date: '—', time: '' };
-  return {
-    date: d.toLocaleDateString(locale),
-    time: d.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }),
-  };
-}
+
 
 export default function StudentDashboard (){
     const {name} = useAuthStore();
     const [resTab, setResTab] = useState('upcoming');
-
+    const navigate = useNavigate();
   const {data : reservations = []} = useQuery({
     queryKey : ['my-reservation'],
     queryFn : reservationService.getMyReservations,
   });
-  
 
 const mapStatusToTab = (status : string) => {
     if(status === 'Pending' || status === 'Confirmed') return 'upcoming';
@@ -70,6 +65,13 @@ return (
               </div>
     
               <div className="db-content">
+                 <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8 text-center sm:text-left flex flex-col sm:flex-row items-center gap-6">
+                    <AvatarUpload />
+                    <div>
+                        <h1 className="text-3xl font-bold text-[#0B1628] mb-2">Hoşgeldiniz, {name}! 🎓</h1>
+                        <p className="text-[#8A96A3] text-lg">Bugün yeni bir şeyler öğrenmeye hazır mısınız?</p>
+                    </div>
+                </div>
                 <div className="db-section-header">
                   <h2 className="db-section-title">Ders Rezervasyonlarım</h2>
                 </div>
@@ -93,8 +95,11 @@ return (
                     const displayCoachName = res.coachName || 'Antrenör';
                     const displayPackageName = res.packageName || 'Ders Paketi';
                     
+                    const daysLeft = calculateRemainingDays(res.expirationAt)
                     return (
-                      <div key={res.id} className={`res-card ${statusClass}`}>
+                      <div key={res.id} className={`res-card ${statusClass} cursor-pointer hover:shadow-md transition-shadow`}
+                      onClick={() => navigate(`/reservation/${res.id}`)}
+                      >
                         <div className="res-card-top">
                           <div className="res-date-block">
                             <span className="res-time mr-3 ">{formatted.time}</span>  
@@ -118,14 +123,16 @@ return (
                                   ? 'Online Oturum'
                                   :res.locationType
                                 }
-
-
                               </p>
                             </div>
                           </div>
                           <div className="res-pkg-row">
                             <p className="res-pkg-name">{displayPackageName}</p>
                           </div>
+                          <br />
+                          <div className="bg-[#093A32]/10 text-[#093A32] px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap">
+                        ⏳ Kalan Süre: {daysLeft} Gün
+                    </div>
                         </div>
                       </div>
                     );

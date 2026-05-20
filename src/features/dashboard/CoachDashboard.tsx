@@ -5,6 +5,8 @@ import { useAuthStore } from '../auth/authStore';
 import { coachService } from '../../api/services/coachService';
 import { lessonPackageService } from '../../api/services/lessonPackageService';
 import { reservationService } from '../../api/services/reservationService';
+import { calculateRemainingDays, formatDate } from '../../utils/dateUtils';
+import AvatarUpload from '../../components/common/AvatarUpload';
 
 const Icon = ({d, ...p} : any) => (
   <svg fill="none" stroke="currentColor" strokeWidth ="1.8" viewBox='0 0 24 24' strokeLinecap='round' strokeLinejoin='round' {...p} > 
@@ -12,15 +14,7 @@ const Icon = ({d, ...p} : any) => (
   </svg >
 );
 
-function formatDate(dateStr: string | undefined, locale = 'tr-TR') {
-  if (!dateStr) return { date: '—', time: '' };
-  const d = new Date(dateStr);
-  if (isNaN(d.getTime())) return { date: '—', time: '' };
-  return {
-    date: d.toLocaleDateString(locale),
-    time: d.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }),
-  };
-}
+
 
 export default function CoachDashboard() {
  const {name} = useAuthStore();
@@ -82,7 +76,6 @@ export default function CoachDashboard() {
     cancelRes({id,reason});
   }
  }
-
 
 
  const {mutate : deletePackage, isPending : isDeleting} = useMutation({
@@ -164,7 +157,13 @@ const navItems = [
           </div>
 
           <div className="db-content">
-            
+             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8 text-center sm:text-left flex flex-col sm:flex-row items-center gap-6">
+                    <AvatarUpload />
+                    <div>
+                        <h1 className="text-3xl font-bold text-[#0B1628] mb-2">Hoşgeldiniz, {name}!</h1>
+                      
+                    </div>
+                </div>
             {/* STATS */}
             <div className="db-stats">
               <div className="stat-card">
@@ -207,8 +206,11 @@ const navItems = [
                     const displayStudentName = res.studentName || 'Antrenör';
                     const displayPackageName = res.packageName || 'Ders Paketi';
                     
+                    const daysLeft = calculateRemainingDays(res.expirationAt)
                     return (
-                      <div key={res.id} className={`res-card ${statusClass}`}>
+                      <div key={res.id} className={`res-card ${statusClass} cursor-pointer hover:shadow-md transition-shadow`}
+                      onClick={() => navigate(`/reservation/${res.id}`)}
+                      >
                         <div className="res-card-top">
                           <div className="res-date-block">
                             <span className="res-time mr-3">{formatted.time}</span>
@@ -249,6 +251,11 @@ const navItems = [
                           <div className="res-pkg-row">
                             <p className="res-pkg-name">{displayPackageName}</p>
                           </div>
+                          <br />
+                          <div className="bg-[#093A32]/10 text-[#093A32] px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap">
+                        ⏳ Kalan Süre: {daysLeft} Gün
+                         </div>
+
                         </div>
                       </div>
                     );
@@ -256,7 +263,6 @@ const navItems = [
                 </div>
               </>
             )}
-
             {/* PACKAGES SECTION */}
             {(activeNav === 'dashboard' || activeNav === 'packages') && (
               <>

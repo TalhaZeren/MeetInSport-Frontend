@@ -12,6 +12,7 @@ import CoachDashboard from './features/dashboard/CoachDashboard';
 import PublicRoute from './components/PublicRoute';
 import StudentDashboard from './features/dashboard/StudentDashboard';
 import UpdateLessonPackagePage from './features/dashboard/UpdateLessonPackagePage';
+import ReservationDetailPage from './features/dashboard/ReservationDetailPage';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
             <Route path = "coaches/dashboard/create-package" element={<CreateLessonPackagePage />} />
             <Route path = "student/dashboard" element={<StudentDashboard />} />
             <Route path = "coaches/dashboard/update-package/:id" element={<UpdateLessonPackagePage />} />
+            <Route path="reservation/:id" element={<ReservationDetailPage />} />
           </Route>
         </Route>
       </Routes>

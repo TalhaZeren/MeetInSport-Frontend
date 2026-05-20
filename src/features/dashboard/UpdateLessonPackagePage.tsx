@@ -18,10 +18,10 @@ const updatePackageSchema = z.object({
     lessonModel: z.number().min(1, "Lütfen bir ders modeli seçiniz."),
     coverImageUrl: z.string().optional(),
     isActive: z.boolean(), // Removed .default(true) to fix type mismatch with react-hook-form
+    expirationDays : z.number().min(1, "Geçerlilik Süresi en az 1 gün olmalıdır"),
 });
 
 type UpdatePackageFormValues = z.infer<typeof updatePackageSchema>;
-
 
 const UpdateLessonPackagePage = () => {
     const {id} = useParams();
@@ -56,6 +56,7 @@ const UpdateLessonPackagePage = () => {
             lessonModel: 0,
             coverImageUrl: '',
             isActive: true,
+            expirationDays : 30,
         }
     });
 
@@ -82,6 +83,7 @@ const UpdateLessonPackagePage = () => {
                 lessonModel : lessonModelNumber,
                 coverImageUrl : existingPackage.coverImageUrl,
                 isActive : existingPackage.isActive,
+                expirationDays : existingPackage.expirationDays,
             });
             
         }
@@ -118,6 +120,7 @@ const UpdateLessonPackagePage = () => {
             lessonModel: data.lessonModel,
             coverImageUrl: data.coverImageUrl || undefined,
             isActive: data.isActive,
+            expirationDays: data.expirationDays,
         }
         updatePackage(payload);
     };

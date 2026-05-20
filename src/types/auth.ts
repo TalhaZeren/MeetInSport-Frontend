@@ -9,6 +9,7 @@ export interface LoginResponse {
     name : string;
     role :string;
     email : string;
+    avatarUrl : string | null;
 }
 
 export interface RegisterRequest {

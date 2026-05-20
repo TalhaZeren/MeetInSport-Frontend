@@ -231,6 +231,8 @@ const CoachDetailPage = () => {
             <div className="mb-6 border-b border-gray-100 pb-4">
               <h3 className="text-xl font-serif font-bold text-[#0B1628]">Dersi Satın Al</h3>
               <p className="text-[#C9A84C] font-bold mt-1">{selectedPackage.packageName}</p>
+              <label className="block text-sm font-medium text-red-600 tracking-wide mb-2">Uyarı : Bu paketi rezerve ettikten sonra ilgili paketin ders paketi süresi boyunca kullanabilirsiniz.</label>
+              <label className="block text-sm font-medium text-orange-600 tracking-wide mb-2">Ödemeler birebirde antrenöre yapılacaktır.</label>
             </div>
 
             <form onSubmit={handleSubmit(onBookSubmit)} className="space-y-5" >

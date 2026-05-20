@@ -16,6 +16,7 @@ const packageSchema = z.object({
     locationType : z.number().min(1, "Lütfen bir konum türü seçiniz."),
     lessonModel : z.number().min(1, "Lütfen bir ders modeli seçiniz."),
     coverImageUrl : z.string().optional(),
+    expirationDays : z.number().min(1, "Geçerlilik Süresi en az 1 gün olmalıdır"),
 });
 
 type PackageFormValues = z.infer<typeof packageSchema>;
@@ -44,6 +45,7 @@ const CreateLessonPackagePage = () => {
             locationType : 0,
             lessonModel : 0,
             coverImageUrl : '',
+            expirationDays : 30,
         }
     });
 
@@ -77,6 +79,7 @@ const CreateLessonPackagePage = () => {
             locationType : data.locationType,
             lessonModel :  data.lessonModel,
             coverImageUrl : data.coverImageUrl || undefined,
+            expirationDays : data.expirationDays,
         };
         createPackage(payload as any);
     };
@@ -173,6 +176,21 @@ return (
               />
               <p className="text-xs text-gray-500 mt-1">Birden fazla gereksinimi virgülle ayırınız.</p>
             </div>
+
+            {/*  Package expiration duration*/}
+            <div>
+              <label className="block text-sm font-medium text-[#0B1628] uppercase tracking-wide mb-2">
+                Paket Geçerlilik Süresi (Gün)
+              </label>
+              <input
+                type="number"
+                {...register('expirationDays', { valueAsNumber: true })}
+                className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#093A32] ${errors.expirationDays ? 'border-red-500' : 'border-gray-300'}`}
+              />
+              {errors.expirationDays && (
+                <span className="text-red-500 text-sm mt-1">{errors.expirationDays.message}</span>
+              )}
+          </div>
 
             {/* Description */}
             <div className="md:col-span-2">

@@ -147,7 +147,7 @@ const ServicesSection = () => (
               <p className="text-[#C9A84C] text-xs tracking-widest uppercase mb-2">{service.num}</p>
               <h3 className="text-white font-serif text-2xl font-bold mb-3">{service.name}</h3>
               <span className="flex items-center gap-2 text-white/60 text-xs tracking-widest uppercase opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                İncele &rarr;
+             
               </span>
             </div>
           </div>

@@ -23,6 +23,11 @@ export const reservationService = {
    confirmReservation : async (id :string) : Promise<ReservationResponse> =>{
     const response = await axiosClient.put<ReservationResponse>(ENDPOINTS.RESERVATIONS.CONFIRM(id));
     return response.data;
-  }
+  },
+  getReservationById : async (id : string) : Promise<ReservationResponse> => {
+    const response = await axiosClient.get<ReservationResponse>(ENDPOINTS.RESERVATIONS.BY_ID(id));
+    return response.data;
+  },
+  
   
 };

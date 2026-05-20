@@ -92,7 +92,7 @@ const CoachProfileEditPage = () => {
     mutationFn : coachService.updateProfile,
     onSuccess : () => {
       alert("Profil başarıyla güncellendi");
-      navigate("/coach/dashboard");
+      navigate("/coaches/dashboard");
     },
     onError : (error : any) => {
         console.error("Profile update failed.", error);

@@ -8,7 +8,7 @@ export interface CoachResponse{
     email : string;
     sport : string; 
     bio? : string;
-    hourlyRate : number; 
+    hourlyRate : number; x
     experience: number;
     avarageRating : number;
     location?: string;
@@ -33,6 +33,7 @@ export interface CreateLessonPackageRequest{
     locationType : string; 
     lessonModel : string;
     coverImageUrl : string;
+    expirationDays : number;
 }
 
 export interface LessonPackageResponse {
@@ -47,6 +48,7 @@ export interface LessonPackageResponse {
     lessonModel : string;
     coverImageUrl : string;
     isActive : boolean;
+    expirationDays : number;
 }
 
 export const ReservationStatus = {
@@ -84,6 +86,7 @@ export interface ReservationResponse {
   packageName : string;
   coachName: string;
   studentName : string;
+  expirationAt : string;
 }
 
 export interface UpdateLessonPackageRequest {
@@ -97,5 +100,6 @@ export interface UpdateLessonPackageRequest {
     lessonModel : string;
     coverImageUrl : string;
     isActive : boolean;
+    expirationDays : number;  
 }
 

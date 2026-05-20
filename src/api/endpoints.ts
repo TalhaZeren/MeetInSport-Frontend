@@ -32,5 +32,8 @@ export const ENDPOINTS = {
         CANCEL:     (id: string) => `/reservation/${id}/cancel`,
         CONFIRM :   (id: string) => `/reservation/${id}/confirm`,
     },
+      USERS: {
+        AVATAR:   '/users/avatar',
+    },
     
 } as const;
